@@ -8,18 +8,19 @@ const signupController = {
             where: { 
                 email: email,
                 password: password 
-            } 
+            }, include: [
+                'orders'
+            ] 
         }).then((user) => {
-        if (!user) {
-        res.sendStatus(500).json({
+       res.json({
+                success: true,
+                user
+                 });
+        }) .catch (error => {
+            res.json({
                 success: false,
                 error: error.message
             })
-            }
-        res.json({
-                    success: true,
-                    user
-                });
         })
         
     }, 
